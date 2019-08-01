@@ -17,8 +17,8 @@ module.exports = app => {
         .delete(admin(app.api.user.remove))
 
     app.route('/categories')
-        .all(app.config.passport.authenticate())
-        .get(admin(app.api.category.get))
+        //.all(app.config.passport.authenticate())
+        .get(app.api.category.get)
         .post(admin(app.api.category.save))
 
     // Cuidado com ordem! Tem que vir antes de /categories/:id
@@ -99,4 +99,10 @@ module.exports = app => {
         .put(admin(app.api.pessoas.save))
         .delete(admin(app.api.pessoas.remove))
         
+    app.route('/ibpt/versao/')  //
+        //.all(app.config.passport.authenticate())
+        .get(app.api.ibpt.getVersao)
+    
+    app.route('/ibpt/uf/:id')
+        .get(app.api.ibpt.getByUf)
 }
