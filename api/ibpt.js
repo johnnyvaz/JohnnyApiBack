@@ -18,7 +18,7 @@ module.exports = app => {
         
 
         app.db('ibpt_aliquota')
-            .select('codigo','tipo','nacionalfederal','importadosfederal')
+            //.select('codigo','tipo','nacionalfederal','importadosfederal')
             .where({ codestado: req.params.id })
             .limit(limit).offset(page * limit - limit)
             .then(ibpt_aliquota => res.json({ data:  {count, limit, page}, ibpt_aliquota}))
