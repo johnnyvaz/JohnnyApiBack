@@ -1,5 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `johnnyapi` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `johnnyapi`;
+
+
+
 -- MySQL dump 10.14  Distrib 5.5.64-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: johnnyapi

@@ -52,7 +52,7 @@ module.exports = app => {
     const get = (req, res) => {
         app.db('users')
             .select('id', 'name', 'email', 'admin')
-            .whereNull('deletedAt')
+            //.whereNull('deletedAt') /* TODO: remover conteúdo do campo deletedAt */
             .then(users => res.json(users))
             .catch(err => res.status(500).send(err))
     }

@@ -10,7 +10,7 @@ module.exports = app => {
     // const limit = 10
     const getByUf = async (req, res) => {
         const page = req.query.page || 1
-        const limit = req.query.limit || 10
+        const limit = req.query.limit || 99999
 
         const result = await app.db('ibpt_aliquota').count('idtabela')
         .where({ codestado: req.params.id })

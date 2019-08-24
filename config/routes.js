@@ -5,6 +5,10 @@ module.exports = app => {
     app.post('/signin', app.api.auth.signin)
     app.post('/validateToken', app.api.auth.validateToken)
 
+    app.get('/', function (req, res) {
+        res.send('Backend da Api Johnny Vaz, solicite o acesso por email');
+    });
+    
     app.route('/users')
         .all(app.config.passport.authenticate())
         .post(admin(app.api.user.save))
@@ -85,24 +89,45 @@ module.exports = app => {
         .all(app.config.passport.authenticate())
         .get(app.api.telefones.getById)
         .put(admin(app.api.telefones.save))
-        .delete(admin(app.api.telefones.remove)) 
+        .delete(admin(app.api.telefones.remove))     
         
-    app.route('/pessoas/')  //
-        .all(app.config.passport.authenticate())
-        .get(app.api.pessoas.get)
-        .put(admin(app.api.pessoas.save))
-        .delete(admin(app.api.pessoas.remove))
+    app.route('/ibpt/versao/')  //
+            // .all(app.config.passport.authenticate())
+            .get(app.api.ibpt.getVersao)
+        
+    app.route('/ibpt/uf/:id')
+    //    .all(app.config.passport.authenticate())
+        .get(app.api.ibpt.getByUf)
 
     app.route('/pessoas/:id')
         .all(app.config.passport.authenticate())
         .get(app.api.pessoas.getById)
-        .put(admin(app.api.pessoas.save))
+        .put(app.api.pessoas.save)
         .delete(admin(app.api.pessoas.remove))
-        
-    app.route('/ibpt/versao/')  //
-        //.all(app.config.passport.authenticate())
-        .get(app.api.ibpt.getVersao)
     
-    app.route('/ibpt/uf/:id')
-        .get(app.api.ibpt.getByUf)
+    app.route('/pessoas/')  //
+        .all(app.config.passport.authenticate())
+        .get(app.api.pessoas.get)
+        .put(app.api.pessoas.save)
+    
+    app.route('/cursos/')  //
+        .all(app.config.passport.authenticate())
+        .get(app.api.cursos.get)
+        .put(app.api.cursos.save)
+    
+    app.route('/cursos/:id')
+        .all(app.config.passport.authenticate())
+        .get(app.api.cursos.getById)
+        .put(app.api.cursos.save)
+        .delete(admin(app.api.cursos.remove))
+    
+    app.route('/certificados/')  //
+        .all(app.config.passport.authenticate())
+        .get(app.api.certificados.getAll)
+        .put(app.api.certificados.save)
+    
+    app.route('/certificados/pessoa/:id')
+        .all(app.config.passport.authenticate())
+        .get(app.api.certificados.getByPessoa)
+
 }

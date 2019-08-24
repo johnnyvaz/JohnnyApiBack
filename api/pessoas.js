@@ -2,43 +2,41 @@ module.exports = app => {
     const { existsOrError } = app.api.validation
 
     const save = (req, res) => {
-        const pessoa = {...req.body }
+        const pessoas = {...req.body }
 
-        if (req.params.id) pessoa.id = req.params.id
+        if (req.params.id) pessoas.id = req.params.id
 
         try {
-            existsOrError(pessoa.codpessoa, 'Código da pessoa não informado')
-            existsOrError(pessoa.nomecliente, 'Nome não informado')
-            existsOrError(pessoa.nomefantasia, 'Nome Fantasia não informado')
-            existsOrError(pessoa.cnpj, 'CNPJ não informado')
+            existsOrError(pessoas.nome, 'Nome da pessoa não informado')
         } catch (msg) {
             res.status(400).send(msg)
         }
 
-        if (pessoa.id) {
+        if (pessoas.id) {
             app.db('pessoas')
-                .update(pessoa)
-                .where({ id: pessoa.id })
+                .update(pessoas)
+                .where({ id: pessoas.id })
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         } else {
             app.db('pessoas')
-                .insert(pessoa)
-                .then(_ => res.status(201).send({ "status":true, pessoa}))
+                .insert(pessoas)
+                .then(_ => res.status(201).send({ "status":true, pessoas}))
                 .catch(err => res.status(500).send(err))
         }
     }
-    const limit = 10
+    
     const get = async(req, res) => {
         const page = req.query.page || 1
+        const limit = req.query.limit || 10
 
         const result = await app.db('pessoas').count('id').first()
-        const count = parseInt(result.count)
+        const count = result
 
         app.db('pessoas')
             .select('id', 'nome', 'endereco', 'numero', 'bairro', 'email', 'facebook', 'dataNasc')
             .limit(limit).offset(page * limit - limit)
-            .then(pessoas => res.json({ data: pessoas, count, limit }))
+            .then(pessoas => res.json({ data:  pessoas, count, limit, page }))
             .catch(err => res.status(500).send(err))
     }
 
