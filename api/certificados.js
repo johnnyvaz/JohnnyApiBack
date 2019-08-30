@@ -33,9 +33,9 @@ module.exports = app => {
 
         const result = await app.db('certificados').count('id').first()
         const count = result
-const ce = "certificados"
-const cu = "cursos"
-const pe = "pessoas"
+        const ce = "certificados"
+        const cu = "cursos"
+        const pe = "pessoas"
         app.db('certificados')
             .select( ce+'.id', ce+'.idPessoa', pe+'.nome', ce+'.idCurso', cu+'.nomeCurso', ce+'.cursoConcluido',ce+'.dataConclusao',
             ce+'.entregue')

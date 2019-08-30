@@ -90,14 +90,6 @@ module.exports = app => {
         .get(app.api.telefones.getById)
         .put(admin(app.api.telefones.save))
         .delete(admin(app.api.telefones.remove))     
-        
-    app.route('/ibpt/versao/')  //
-            // .all(app.config.passport.authenticate())
-            .get(app.api.ibpt.getVersao)
-        
-    app.route('/ibpt/uf/:id')
-    //    .all(app.config.passport.authenticate())
-        .get(app.api.ibpt.getByUf)
 
     app.route('/pessoas/:id')
         .all(app.config.passport.authenticate())
