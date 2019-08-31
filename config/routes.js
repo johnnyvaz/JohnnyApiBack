@@ -121,5 +121,16 @@ module.exports = app => {
     app.route('/certificados/pessoa/:id')
         .all(app.config.passport.authenticate())
         .get(app.api.certificados.getByPessoa)
+    
+    app.route('/setores/')
+        .all(app.config.passport.authenticate())
+        .get(app.api.setores.get)
+        .put(app.api.setores.save)
+
+    app.route('/patrimonios/')
+        .all(app.config.passport.authenticate())
+        .get(app.api.patrimonios.get)
+        .put(app.api.patrimonios.save)
+
 
 }

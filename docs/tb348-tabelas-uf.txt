@@ -1,0 +1,29 @@
+   {id: 1, sigla: 'AC', descricao:'Acre'},
+vers�o=3 Sigla_UF, DESC_UF, DT_INI, DT_FIM
+AC|Acre|01012009|
+AL|Alagoas|01012009|
+AM|Amazonas|01012009|
+AP|Amap�|01012009|
+BA|Bahia|01012009|
+DF|Distrito Federal|01012009|
+CE|Cear�|01012009|
+ES|Esp�rito Santo|01012009|
+GO|Goi�s|01012009|
+MA|Maranh�o|01012009|
+MT|Mato Grosso|01012009|
+MS|Mato Grosso do Sul|01012009|
+MG|Minas Gerais|01012009|
+PA|Par�|01012009|
+PB|Para�ba|01012009|
+PE|Pernambuco|01012009|
+PR|Paran�|01012009|
+PI|Piau�|01012009|
+RJ|Rio de Janeiro|01012009|
+RN|Rio Grande do Norte|01012009|
+RS|Rio Grande do Sul|01012009|
+RR|Roraima|01012009|
+RO|Rond�nia|01012009|
+SC|Santa Catarina|01012009|
+SP|S�o Paulo|01012009|
+SE|Sergipe|01012009|
+TO|Tocantins|01012009|
