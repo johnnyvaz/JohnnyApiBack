@@ -7,7 +7,7 @@ module.exports = app => {
         if (req.params.id) setores.id = req.params.id
 
         try {
-            existsOrError(setores.setor, 'Nome do setor não informado')
+            existsOrError(setores.nomeSetor, 'Nome do setor não informado')
         } catch (msg) {
             res.status(400).send(msg)
         }
@@ -16,13 +16,14 @@ module.exports = app => {
             app.db('setores')
                 .update(setores)
                 .where({ id: setores.id })
-                .then(_ => res.status(204).send())
+                .then(_ => res.status(204).send({ "status":true, setores}))
                 .catch(err => res.status(500).send(err))
         } else {
             app.db('setores')
                 .insert(setores)
                 .then(_ => res.status(201).send({ "status":true, setores}))
                 .catch(err => res.status(500).send(err))
+                console.log(setores)
         }
     }
     
@@ -31,7 +32,7 @@ module.exports = app => {
         const limit = req.query.limit || 10
 
         const result = await app.db('setores').count('id').first()
-        const count = result
+        const count = parseInt(result.count)
 
         app.db('setores')
             //.select('id', 'nome', 'endereco', 'numero', 'bairro', 'email', 'facebook', 'dataNasc')
@@ -40,5 +41,14 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
-    return { get, save }
+    const getById = (req, res) => {
+        app.db('setores')
+            .where({ id: req.params.id })
+            .first()
+            .then(setor => res.json(setor))
+            .catch(err => res.status(500).send(err))
+    }
+
+
+    return { get, save, getById }
 }

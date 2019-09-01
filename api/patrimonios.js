@@ -31,7 +31,7 @@ module.exports = app => {
         const limit = req.query.limit || 10
 
         const result = await app.db('patrimonios').count('id').first()
-        const count = result
+        const count = parseInt(result.count)
 
         app.db('patrimonios')
             //.select('id', 'nome', 'endereco', 'numero', 'bairro', 'email', 'facebook', 'dataNasc')
@@ -39,6 +39,24 @@ module.exports = app => {
             .then(patrimonios => res.json({ data:  patrimonios, count, limit, page }))
             .catch(err => res.status(500).send(err))
     }
+    
+    const getById = (req, res) => {
+        app.db('patrimonios')
+            .where({ id: req.params.id })
+            .first()
+            .then(setor => res.json(setor))
+            .catch(err => res.status(500).send(err))
+    }
+    const remove = async(req,res) => {
+        try {
+            const rowsDeleted = await app.db('patrimonios')
+            .where({ id: req.params.id }).del()
+            res.status(204).send()
+        } catch(msg) {
+            res.status(500).send(msg)
+        }
+    }
 
-    return { get, save }
+
+    return { get, save , getById, remove}
 }

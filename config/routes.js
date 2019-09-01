@@ -38,7 +38,7 @@ module.exports = app => {
 
     app.route('/articles')
         .all(app.config.passport.authenticate())
-        .get(admin(app.api.article.get))
+        .get(app.api.article.get)
         .post(admin(app.api.article.save))
 
     app.route('/articles/:id')
@@ -126,11 +126,24 @@ module.exports = app => {
         .all(app.config.passport.authenticate())
         .get(app.api.setores.get)
         .put(app.api.setores.save)
+        .post(app.api.setores.save)
 
-    app.route('/patrimonios/')
+    app.route('/setores/:id')
+        .all(app.config.passport.authenticate())
+        .get(app.api.setores.getById)
+        .put(app.api.setores.save)
+
+        app.route('/patrimonios/')
         .all(app.config.passport.authenticate())
         .get(app.api.patrimonios.get)
         .put(app.api.patrimonios.save)
+        .post(app.api.patrimonios.save)
+
+    app.route('/patrimonios/:id')
+        .all(app.config.passport.authenticate())
+        .get(app.api.patrimonios.getById)
+        .put(app.api.patrimonios.save)
+        .delete(app.api.patrimonios.remove)
 
 
 }
