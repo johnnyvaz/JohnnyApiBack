@@ -68,7 +68,7 @@ module.exports = app => {
         .delete(admin(app.api.categorias.remove))
         
     app.route('/municipios/')  //
-        .all(app.config.passport.authenticate())
+        //.all(app.config.passport.authenticate())
         .get(app.api.municipios.get)
         .put(admin(app.api.municipios.save))
         .delete(admin(app.api.municipios.remove))
