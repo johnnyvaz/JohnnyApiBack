@@ -133,7 +133,7 @@ module.exports = app => {
         .get(app.api.setores.getById)
         .put(app.api.setores.save)
 
-        app.route('/patrimonios/')
+    app.route('/patrimonios/')
         .all(app.config.passport.authenticate())
         .get(app.api.patrimonios.get)
         .put(app.api.patrimonios.save)
@@ -144,6 +144,12 @@ module.exports = app => {
         .get(app.api.patrimonios.getById)
         .put(app.api.patrimonios.save)
         .delete(app.api.patrimonios.remove)
+
+    app.route('/asterisk_startTransferedCall/')
+        //.all(app.config.passport.authenticate())
+        .get(app.api.andes_movidesk.get)
+        //.put(app.api.patrimonios.save)
+        .post(app.api.andes_movidesk.save)
 
 
 }
